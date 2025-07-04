@@ -18,13 +18,6 @@ public class LeetCode650 {
         return dp[n];
     }
 
-    private int primef(int num) {
-        for(int i = num; i >= 0; --i) {
-            if(prime[i] && num % i == 0) return i;
-        }
-        return -1;
-    }
-
     private boolean[] getPrimes(int n) {
         boolean[] primes = new boolean[n+1];
         Arrays.fill(primes, true);
