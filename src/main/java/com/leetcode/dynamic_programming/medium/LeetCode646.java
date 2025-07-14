@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming;
+package com.leetcode.dynamic_programming.medium;
 
 import java.util.Arrays;
 import java.util.Comparator;

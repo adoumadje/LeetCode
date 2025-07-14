@@ -1,4 +1,4 @@
-import com.leetcode.dynamic_programming.LeetCode764;
+import com.leetcode.dynamic_programming.medium.LeetCode764;
 
 public class App {
     public static void main(String[] args) {

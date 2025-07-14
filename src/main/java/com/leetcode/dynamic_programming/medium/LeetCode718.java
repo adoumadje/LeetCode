@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming;
+package com.leetcode.dynamic_programming.medium;
 
 public class LeetCode718 {
     public int findLength(int[] nums1, int[] nums2) {

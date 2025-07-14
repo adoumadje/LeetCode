@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming;
+package com.leetcode.dynamic_programming.medium;
 
 public class LeetCode688 {
     int[][] deriv = new int[][]{{2, 1},{2, -1}, {-2, 1}, {-2, -1},

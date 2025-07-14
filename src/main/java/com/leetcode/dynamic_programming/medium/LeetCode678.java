@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming;
+package com.leetcode.dynamic_programming.medium;
 
 public class LeetCode678 {
     public boolean checkValidString(String s) {

@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming;
+package com.leetcode.dynamic_programming.medium;
 
 public class LeetCode673 {
     public int findNumberOfLIS(int[] nums) {

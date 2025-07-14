@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming;
+package com.leetcode.dynamic_programming.medium;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
