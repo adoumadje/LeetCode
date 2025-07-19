@@ -1,29 +1,27 @@
 package com.leetcode.dynamic_programming.medium;
 
+import java.util.Arrays;
+
 public class LeetCode837 {
-    int ok, n, maxPts;
-    Double[] mem;
-
     public double new21Game(int n, int k, int maxPts) {
-        this.ok = k;
-        this.n = n;
-        this.maxPts = maxPts;
-        mem = new Double[k+1];
-        return dfs(k);
-    }
-
-    private double dfs(int k) {
-        if(k <= 0) {
-            return ok - k <= n ? 1.0 : 0.0;
+        if(k == 0) return 1.0;
+        if(n >= k-1 + maxPts) return 1.0;
+        int maxScore = k-1 + maxPts;
+        double[] dp = new double[n+1];
+        double probability = 0.0;
+        double win = 1.0;
+        dp[0] = 1.0;
+        for(int i = 1; i <= n; ++i) {
+            dp[i] = win * 1.0 / maxPts;
+            if(i < k) {
+                win += dp[i];
+            } else {
+                probability += dp[i];
+            }
+            if(i >= maxPts) {
+                win -= dp[i-maxPts];
+            }
         }
-
-        if(mem[k] != null) return mem[k];
-
-        double res = 0.0;
-        for(int i = 1; i <= maxPts; ++i) {
-            res += dfs(k-i);
-        }
-
-        return mem[k] = res / maxPts;
+        return probability;
     }
 }
