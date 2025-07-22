@@ -19,6 +19,7 @@ public class LeetCode877 {
         if(dp[i][j] != null) {
             return dp[i][j];
         }
+
         int res = Math.max(
                 piles[i] - dfs(i+1, j),
                 piles[j] - dfs(i, j-1)
