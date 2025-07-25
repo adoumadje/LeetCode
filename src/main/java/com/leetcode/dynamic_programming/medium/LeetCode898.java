@@ -7,15 +7,14 @@ public class LeetCode898 {
     public int subarrayBitwiseORs(int[] arr) {
         int n = arr.length;
         Set<Integer> res = new HashSet<>();
-        Set<Integer> past = new HashSet<>();
-        for(int a: arr) {
-            Set<Integer> curr = new HashSet<>();
-            curr.add(a);
-            for(int b: past) {
-                curr.add(a | b);
+        for(int i = 0; i < n; ++i) {
+            res.add(arr[i]);
+            for(int j = i-1; j >= 0; --j) {
+                if((arr[j] | arr[i]) == arr[j]) {
+                    break;
+                }
+                res.add(arr[j] |= arr[i]);
             }
-            past = curr;
-            res.addAll(past);
         }
         return res.size();
     }
