@@ -22,41 +22,26 @@ public class LeetCode894 {
      *      Solution
      */
 
-    boolean[] valid;
-
+    List<TreeNode>[] mem;
     public List<TreeNode> allPossibleFBT(int n) {
-        if(n == 1) return Arrays.asList(new TreeNode(0));
-        valid = new boolean[n];
-        valid[1] = true;
-        for(int i = 2; i < n-1; i *= 2) {
-            valid[i+1] = true;
-        }
+        mem = new List[n+1];
         return dfs(n);
     }
 
-    private List<TreeNode> dfs(int n) {
-        if(n == 1) {
-            return Arrays.asList(new TreeNode(0));
-        }
+    public List<TreeNode> dfs(int n) {
+        if(n == 0) return new ArrayList<>();
+        if(n == 1) return Arrays.asList(new TreeNode(0));
+        if(mem[n] != null) return mem[n];
         List<TreeNode> res = new ArrayList<>();
-        for(int i = 0; i < n; ) {
-
-            int x = i+1;
-            int y = n-1-x;
-            if(y >= 0 && valid[x] && valid[y]) {
-                List<TreeNode> lefts = dfs(x);
-                List<TreeNode> rights = dfs(y);
-                for(TreeNode l: lefts) {
-                    for(TreeNode r: rights) {
-                        TreeNode node = new TreeNode(0);
-                        node.left = l;
-                        node.right = r;
-                        res.add(node);
-                    }
+        for(int i = 0; i < n; ++i) {
+            List<TreeNode> lefts = dfs(i);
+            List<TreeNode> rights = dfs(n-1-i);
+            for(TreeNode l: lefts) {
+                for(TreeNode r: rights) {
+                    res.add(new TreeNode(0, l, r));
                 }
             }
-            i = i == 0 ? 2 : i*2;
         }
-        return res;
+        return mem[n] = res;
     }
 }
