@@ -1,42 +1,23 @@
 package com.leetcode.dynamic_programming.medium;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Arrays;
+import java.util.Stack;
 
 public class LeetCode907 {
-    int MOD = (int) 1e9 + 7;
     public int sumSubarrayMins(int[] arr) {
         int n = arr.length;
-        Deque<int[]> deque = new ArrayDeque<>();
-        long sum = 0;
+        Stack<int[]> stack = new Stack<>();
+        long[] dp = new long[n];
         for(int i = 0; i < n; ++i) {
-            int left = 0;
-            if(deque.isEmpty()) {
-                left = i+1;
-            } else {
-                int count = 0;
-                while (!deque.isEmpty() && deque.peekLast()[0] >= arr[i]) {
-                    int[] curr = deque.removeLast();
-                    left = curr[2];
-                    int right = count;
-                    sum += (long) left * right * curr[0];
-                    ++count;
-                }
-                if(deque.isEmpty()) {
-                    left = i+1;
-                } else {
-                    left = i - deque.peekLast()[1];
-                }
+            while (!stack.isEmpty() && stack.peek()[0] >= arr[i]) {
+                stack.pop();
             }
-            deque.add(new int[]{arr[i], i, left});
+            int j = stack.isEmpty() ? -1 : stack.peek()[1];
+            dp[i] = j == -1 ? arr[i] * (i+1) : dp[j] + arr[i] * (i-j);
+            stack.push(new int[]{arr[i], i});
         }
-        int right = 0;
-        while(!deque.isEmpty()) {
-            int[] curr = deque.removeLast();
-            int left = curr[2];
-            sum += (long) left * right * curr[0];
-            right++;
-        }
-        return (int)(sum % MOD);
+        long MOD = (long) 1e9 + 7;
+        long res = Arrays.stream(dp).reduce(0, (a, b) -> (a+b) % MOD);
+        return (int)res;
     }
 }
