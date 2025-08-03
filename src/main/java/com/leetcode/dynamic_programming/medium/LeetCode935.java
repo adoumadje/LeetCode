@@ -1,39 +1,28 @@
 package com.leetcode.dynamic_programming.medium;
 
 public class LeetCode935 {
-    Integer[][][] mem;
+
+    int[][] nexts = {{4,6}, {6,8}, {7,9}, {4,8}, {0,3,9}, {}, {0,1,7}, {2,6}, {1,3}, {2,4}};
+                    /*  0     1      2      3      4      5      6      7       8      9   */
+    Integer[][] mem;
     int MOD = (int) 1e9 + 7;
-    int row, col;
-    int[][] derivs = new int[][] {
-            {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
-            {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
-    };
-
     public int knightDialer(int n) {
-        row = 4;
-        col = 3;
-        mem = new Integer[row][col][n+1];
-
+        int m = 10;
+        mem = new Integer[m][n+1];
         long res = 0;
-        for(int r = 0; r < row; ++r) {
-            for(int c = 0; c < col; ++c) {
-                res += dfs(r, c, n) % MOD;
-            }
+        for(int i = 0; i < m; ++i) {
+            res += dfs(i, n) % MOD;
         }
-
         return (int) (res % MOD);
     }
 
-    private int dfs(int r, int c, int n) {
-        if(r < 0 || r >= row || c < 0 || c >= col || (r == 3 && c != 1)) {
-            return 0;
-        }
+    private int dfs(int i, int n) {
         if(n == 1) return 1;
-        if(mem[r][c][n] != null) return mem[r][c][n];
+        if(mem[i][n] != null) return mem[i][n];
         long res = 0;
-        for(int[] d: derivs) {
-            res += dfs(r + d[0], c + d[1], n-1) % MOD;
+        for(int next: nexts[i]) {
+            res += dfs(next, n-1) % MOD;
         }
-        return mem[r][c][n] = (int) (res % MOD);
+        return mem[i][n] = (int)(res % MOD);
     }
 }
