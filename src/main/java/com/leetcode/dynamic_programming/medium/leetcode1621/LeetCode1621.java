@@ -18,6 +18,6 @@ public class LeetCode1621 {
             }
         }
 
-        return (int) (d[k][n-1] % MOD);
+        return (int) (D[k][n-1] % MOD);
     }
 }
