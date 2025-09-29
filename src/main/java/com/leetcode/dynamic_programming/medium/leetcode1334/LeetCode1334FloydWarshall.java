@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming.medium;
+package com.leetcode.dynamic_programming.medium.leetcode1334;
 
 public class LeetCode1334FloydWarshall {
     public int findTheCity(int n, int[][] edges, int distanceThreshold) {

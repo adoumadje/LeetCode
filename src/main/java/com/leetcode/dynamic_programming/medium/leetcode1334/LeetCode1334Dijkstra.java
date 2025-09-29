@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming.medium;
+package com.leetcode.dynamic_programming.medium.leetcode1334;
 
 import java.util.*;
 
