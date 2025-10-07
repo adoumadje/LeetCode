@@ -1,37 +1,30 @@
 package com.leetcode.dynamic_programming.medium;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class LeetCode1824 {
     public int minSideJumps(int[] obstacles) {
-        int n = obstacles.length;
-        Queue<int[]> q = new LinkedList<>();
-        // {x, y, count}
-        q.add(new int[]{0, 2, 0});
-        int res = Integer.MAX_VALUE;
-        int[] deriv = {1, 2, -1, -2};
-        while (!q.isEmpty()) {
-            int qs = q.size();
-            while (qs-- > 0) {
-                int[] curr = q.poll();
-                int x = curr[0], y = curr[1], count = curr[2];
-                if(x == n-1) {
-                    res = Math.min(res, count);
-                } else {
-                    if(obstacles[x+1] != y) {
-                        q.add(new int[]{x+1, y, count});
-                    } else {
-                        for(int dy: deriv) {
-                            int ny = y + dy;
-                            if(ny > 0 && ny < 4 && obstacles[x] != ny) {
-                                q.add(new int[]{x, ny, 1 + count});
-                            }
-                        }
-                    }
+        int n = obstacles.length, k = 3;
+        int[] prev = {1, 0, 1}, curr;
+        int res = n;
+        for(int i = 1; i < n; ++i) {
+            curr = new int[k];
+            if(obstacles[i] != 0) curr[obstacles[i] - 1] = n;
+            for(int j = 0; j < k; ++j) {
+                if(curr[j] != n) {
+                    int p0 = prev[j];
+                    int p1 = curr[(j+1)%k] < n ? 1 + prev[(j+1)%k] : n;
+                    int p2 = curr[(j+2)%k] < n ? 1 + prev[(j+2)%k] : n;
+                    curr[j] = min(n, p0, p1, p2);
+                    if(i == n-1) res = Math.min(res, curr[j]);
                 }
             }
+            prev = curr;
         }
         return res;
+    }
+
+    private int min(int ...arr) {
+        int m = Integer.MAX_VALUE;
+        for (int x: arr) m = Math.min(m, x);
+        return m;
     }
 }
