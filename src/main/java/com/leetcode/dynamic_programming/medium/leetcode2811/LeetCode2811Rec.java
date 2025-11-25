@@ -1,8 +1,8 @@
-package com.leetcode.dynamic_programming.medium;
+package com.leetcode.dynamic_programming.medium.leetcode2811;
 
 import java.util.List;
 
-public class LeetCode2811 {
+public class LeetCode2811Rec {
     Boolean[][] mem;
     int[] presums;
     List<Integer> nums;
