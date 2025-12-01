@@ -1,4 +1,4 @@
-package com.leetcode.dynamic_programming.medium;
+package com.leetcode.dynamic_programming.medium.leetcode2896;
 
 import java.util.ArrayList;
 import java.util.List;
