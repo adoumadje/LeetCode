@@ -1,6 +1,6 @@
-package com.leetcode.dynamic_programming.medium;
+package com.leetcode.dynamic_programming.medium.leetcode3290;
 
-public class LeetCode3290 {
+public class LeetCode3290Rec {
     int[] a, b;
     long INF = Long.MIN_VALUE + (long) (1e10);
     Long[][] mem;
