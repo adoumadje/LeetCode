@@ -16,18 +16,15 @@ public class LeetCode3366 {
     private int dfs(int i, int op1, int op2) {
         if(i >= n) return 0;
         if(mem[i][op1][op2] != null) return mem[i][op1][op2];
-        int div = nums[i] % 2 == 0 ? nums[i] / 2 : nums[i] / 2 + 1;
-        int subk = nums[i] - k;
-        int divk = subk % 2 == 0? subk / 2 : subk / 2 + 1;
         int res = nums[i] + dfs(i+1, op1, op2);
         if(op1 > 0)
-            res = Math.min(res, div + dfs(i+1, op1-1, op2));
+            res = Math.min(res, (nums[i] + 1) / 2 + dfs(i+1, op1-1, op2));
         if(op2 > 0 && nums[i] >= k)
-            res = Math.min(res, subk + dfs(i+1, op1, op2-1));
-        if(op1 > 0 && op2 > 0 && div >= k)
-            res = Math.min(res, div - k + dfs(i+1, op1-1, op2-1));
+            res = Math.min(res, nums[i] - k + dfs(i+1, op1, op2-1));
+        if(op1 > 0 && op2 > 0 && (nums[i] + 1) / 2 >= k)
+            res = Math.min(res, (nums[i] + 1) / 2 - k + dfs(i+1, op1-1, op2-1));
         if(op1 > 0 && op2 > 0 && nums[i] >= k)
-            res = Math.min(res, divk + dfs(i+1, op1-1, op2-1));
+            res = Math.min(res, (nums[i] - k + 1) / 2 + dfs(i+1, op1-1, op2-1));
         return mem[i][op1][op2] = res;
     }
 }
